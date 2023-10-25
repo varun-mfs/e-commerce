@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">ECommerce</a>
+    <a class="navbar-brand" href="#">ZipKart</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -15,6 +15,15 @@
       
       </ul>
 
+      <!-- Cart icon -->
+      <a class="navbar-brand position-relative me-5" href="#">
+        <img src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-svg-png-icon-download-28.png" alt="Logo" width="26" height="20" class="d-inline-block align-text-center">
+        <!-- Cart Item count -->
+        <span class="position-absolute start-100 top-10 translate-middle badge rounded-pill bg-danger">
+          1
+          <span class="visually-hidden">unread messages</span>
+        </span>
+      </a>
 
       <!-- Avatar -->
       <% if user_signed_in? %> 
