@@ -1,26 +1,25 @@
-<%# <p id="notice"><%= notice</p> %>
 <%= render 'custom/header' %>
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
-<p>
-  <strong>Price:</strong>
-  <%= @product.price %>
-</p>
-<p>
-  <strong>Stock:</strong>
-  <%= @product.in_stock ? 'Available' : 'Currently unavailable' %>
-</p>
-<% if @product.image.attached? %>
-  <p>
-    <strong>Image:</strong>
-    <%= image_tag @product.image, :size => '100%xauto' %>
-  </p>
-<% end %>
-<%= link_to 'Edit', edit_product_path(@product), class: 'btn btn-primary' %>
-<%= link_to 'Back', products_path, class: 'btn btn-secondary' %>
+<div class='container'>
+  <div class='row'>
+    <div class='col'>
+      <div class="card" style="width: 18rem;">
+        <% if @product.image.attached? %>
+          <p>
+            <%= image_tag @product.image, :size => '100%xauto', class: "card-img-top" %>
+          </p>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= @product.name %></h5>
+          <p class="card-text">
+            <strong>Description: </strong> <br>
+            <%= @product.description[0,650] + "..." %>
+            <p class="card-text">
+              <strong>Stock: </strong>
+              <%= @product.in_stock ? 'Available' : 'Currently unavailable' %></p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <%= link_to 'Edit', edit_product_path(@product), class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
