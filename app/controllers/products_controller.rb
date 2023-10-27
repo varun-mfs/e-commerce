@@ -42,12 +42,10 @@ class ProductsController < ApplicationController
 
   # DELETE /products/1
   def destroy
-    begin
-      @product.destroy
+    if @product.destroy
       redirect_to products_url, notice: 'Product was successfully deleted.'
-    rescue StandardError => e
-      flash[:alert] = "Error destroying the product: #{e.message}"
-      redirect_to products_url
+    else
+      redirect_to products_url, notice: 'Something went wrong!'
     end
   end
 
