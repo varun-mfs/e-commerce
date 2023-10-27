@@ -1,4 +1,4 @@
-<%= form_with(model: product, local: true) do |form| %>
+<%= form_with(model: @product, local: true) do |form| %>
   <div class="mb-3">
     <%= form.label :name, class: 'form-label' %>
     <%= form.text_field :name, class: 'form-control' %>
@@ -14,6 +14,10 @@
   <div class="mb-3">
     <%= form.label :in_stock, class: 'form-check-label' %>
     <%= form.check_box :in_stock, class: 'form-check-input' %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :image, class: 'form-label' %>
+    <%= form.file_field :image, class: 'form-control' %>
   </div>
   <div class="mb-3">
     <%= form.submit class: 'btn btn-primary' %>
