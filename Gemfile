@@ -14,6 +14,10 @@ gem "pg"
 
 gem "devise" 
 
+gem "bootstrap"
+
+gem "sassc-rails"
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 

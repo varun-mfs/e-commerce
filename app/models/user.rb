@@ -10,4 +10,8 @@ class User < ApplicationRecord
   # Roles
   CUSTOMER = 0
   ADMIN = 1
+
+  def admin?
+    role == ADMIN
+  end
 end
