@@ -42,8 +42,13 @@ class ProductsController < ApplicationController
 
   # DELETE /products/1
   def destroy
-    @product.destroy
-    redirect_to products_url, notice: 'Product was successfully destroyed.'
+    begin
+      @product.destroy
+      redirect_to products_url, notice: 'Product was successfully deleted.'
+    rescue StandardError => e
+      flash[:alert] = "Error destroying the product: #{e.message}"
+      redirect_to products_url
+    end
   end
 
   private
