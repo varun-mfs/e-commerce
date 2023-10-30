@@ -4,7 +4,9 @@
   <table class="table table-striped">
     <thead>
       <tr>
+        <th>Id</th>
         <th>Name</th>
+        <th>Image</th>
         <th>Description</th>
         <th>Price</th>
         <th>In Stock</th>
@@ -14,38 +16,40 @@
     <tbody>
       <% @products.each do |product| %>
         <tr>
+          <td><%= product.id %></td>
           <td><%= product.name %></td>
-          <td><%= product.description %></td>
-          <td><%= product.price %></td>
-          <td><%= product.in_stock ? 'Available' : 'Currently unavailable' %></td>
-          <td><%= link_to 'Show', product %></td>
-          <% if current_user&.admin? %>
-            <td><%= link_to 'Edit', edit_product_path(product) %></td>
-            <td><%= link_to 'Destroy', product, data: { turbo_method: :delete, confirm: 'Are you sure?' } %></td>
-          <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <%= link_to 'New Product', new_product_path, class: 'btn btn-primary' %>
-<% else %>
-  <div class='container'>
-    <div class='row'>
-      <% @products.each do |product| %>
-        <div class='col'>
-          <div class="card" style="width: 18rem;">
-            <% if product.image.attached? %>
-              <p>
-                <%= image_tag product.image, :size => '100%xauto', class: "card-img-top" %>
-              </p>
+          <td><img class="rounded-circle" width="45" <%=image_tag(product.image)%></td>
+            <td><%= product.description %></td>
+            <td><%= product.price %></td>
+            <td><%= product.in_stock ? 'Available' : 'Currently unavailable' %></td>
+            <td><%= link_to 'Show', product %></td>
+            <% if current_user&.admin? %>
+              <td><%= link_to 'Edit', edit_product_path(product) %></td>
+              <td><%= link_to 'Destroy', product, data: { turbo_method: :delete, confirm: 'Are you sure?' } %></td>
             <% end %>
-            <div class="card-body p-3 pt-0">
-              <h6 class="card-title"><%= product.name %></h6>
-              <%= link_to '', product, class: "stretched-link" %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= link_to 'New Product', new_product_path, class: 'btn btn-primary' %>
+  <% else %>
+    <div class='container'>
+      <div class='row'>
+        <% @products.each do |product| %>
+          <div class='col'>
+            <div class="card" style="width: 18rem;">
+              <% if product.image.attached? %>
+                <p>
+                  <%= image_tag product.image, :size => '100%xauto', class: "card-img-top" %>
+                </p>
+              <% end %>
+              <div class="card-body p-3 pt-0">
+                <h6 class="card-title"><%= product.name %></h6>
+                <%= link_to '', product, class: "stretched-link" %>
+              </div>
             </div>
           </div>
-        </div>
-      <% end  %>
+        <% end  %>
+      </div>
     </div>
-  </div>
-<% end  %>
+  <% end  %>
