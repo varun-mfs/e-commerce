@@ -16,8 +16,16 @@
             <p class="card-text">
               <strong>Stock: </strong>
               <%= @product.in_stock ? 'Available' : 'Currently unavailable' %></p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-            <%= link_to 'Edit', edit_product_path(@product), class: 'btn btn-primary' %>
+            <% if !current_user&.admin?  %>
+              <%# <a href="#" class="btn btn-primary">Add to cart</a> %>
+              <%= form_with(url: add_to_cart_product_path(@product), method: :post, class: 'mb-3') do |form| %>
+                <%= form.hidden_field :quantity, value: 1 %>
+                <%= form.submit 'Add to Cart', class: 'btn btn-success' %>
+              <% end %>
+            <% end %>
+            <% if current_user&.admin?  %>
+              <%= link_to 'Edit', edit_product_path(@product), class: 'btn btn-primary' %>
+            <% end %>
           </div>
         </div>
       </div>

@@ -14,4 +14,9 @@ class User < ApplicationRecord
   def admin?
     role == ADMIN
   end
+
+  # TODO: check this before commit
+  def cart
+    super || create_cart
+  end
 end
