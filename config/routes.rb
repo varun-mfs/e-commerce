@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   resources :users do
     resources :products
   end
+  resources :products do
+    post 'add_to_cart', on: :member
+  end
+  resource :cart, only: [:show]
+  resources :cart_items, only: [:destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

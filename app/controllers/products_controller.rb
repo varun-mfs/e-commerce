@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :add_to_cart]
   # before_action :authenticate_admin!, except: [:index, :show]
   before_action :authenticate_user!, except: [:index, :show]
 
@@ -52,6 +52,16 @@ class ProductsController < ApplicationController
       redirect_to products_url, notice: 'Product was successfully deleted.'
     else
       redirect_to products_url, notice: 'Something went wrong!'
+    end
+  end
+
+  # Add product to cart
+  def add_to_cart
+    quantity = params[:quantity].to_i
+    if current_user.cart.add_item(@product, quantity)
+      redirect_to @product, notice: 'Product added to cart successfully.'
+    else
+      redirect_to @product, notice: 'Something went wrong!'
     end
   end
 

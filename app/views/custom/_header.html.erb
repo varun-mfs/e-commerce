@@ -12,11 +12,10 @@
         <li class="nav-item">
           <a class="nav-link" href="/products">Products</a>
         </li>
-      
       </ul>
 
       <!-- Cart icon -->
-      <a class="navbar-brand position-relative me-5" href="#">
+      <a class="navbar-brand position-relative me-5" href="/cart">
         <img src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-svg-png-icon-download-28.png" alt="Logo" width="26" height="20" class="d-inline-block align-text-center">
         <!-- Cart Item count -->
         <span class="position-absolute start-100 top-10 translate-middle badge rounded-pill bg-danger">
@@ -38,9 +37,12 @@
           />
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="avatarDropdown">
-            <li>
-                <%= link_to "Sign out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %> 
-            </li>
+          <li>
+            <span class="dropdown-item"><%= current_user.email %></span>
+          </li>
+          <li>
+            <%= link_to "Sign out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %> 
+          </li>
         </ul>
       </div>
       <% else %>
