@@ -59,11 +59,10 @@ class ProductsController < ApplicationController
   def add_to_cart
     quantity = params[:quantity].to_i
     if current_user.cart.add_item(@product, quantity)
-      puts "quantity =================>", quantity
-      puts "current_user.cart =================>", current_user.cart
+      redirect_to @product, notice: 'Product added to cart successfully.'
+    else
+      redirect_to @product, notice: 'Something went wrong!'
     end
-    redirect_to @product, notice: 'Product added to cart successfully.'
-    return;
   end
 
   private
