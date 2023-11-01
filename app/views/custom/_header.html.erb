@@ -12,16 +12,21 @@
         <li class="nav-item">
           <a class="nav-link" href="/products">Products</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/orders">Orders</a>
+        </li>
       </ul>
 
       <!-- Cart icon -->
       <a class="navbar-brand position-relative me-5" href="/cart">
         <img src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-svg-png-icon-download-28.png" alt="Logo" width="26" height="20" class="d-inline-block align-text-center">
         <!-- Cart Item count -->
-        <span class="position-absolute start-100 top-10 translate-middle badge rounded-pill bg-danger">
-          1
-          <span class="visually-hidden">unread messages</span>
+        <% if current_user&.cart&.cart_items&.length %>
+          <span class="position-absolute start-100 top-10 translate-middle badge rounded-pill bg-danger">
+            <%= current_user&.cart&.cart_items&.length %>
+            <span class="visually-hidden">unread messages</span>
         </span>
+        <% end %>
       </a>
 
       <!-- Avatar -->
@@ -48,7 +53,6 @@
       <% else %>
           <%= button_to "Sign in", new_user_session_path, class: "btn btn-outline-success"%> 
       <% end %>
-      
     </div>
   </div>
 </nav>

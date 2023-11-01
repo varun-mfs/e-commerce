@@ -1,0 +1,29 @@
+<div class="container mt-4">
+  <h1>All Orders</h1>
+  <% if @orders.present? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Invoice Number</th>
+          <th>Total Price</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.invoice_number %></td>
+            <td><%= number_to_currency(order.total_price) %></td>
+            <td>
+              <%= link_to 'View', order_path(order), class: 'btn btn-primary btn-sm' %>
+              <%= button_to 'Delete', order, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No orders available.</p>
+  <% end %>
+  <%= link_to 'Back to Home', root_path, class: 'btn btn-secondary mt-3' %>
+</div>
