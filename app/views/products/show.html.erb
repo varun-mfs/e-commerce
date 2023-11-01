@@ -1,32 +1,44 @@
 <div class='container'>
   <div class='row'>
-    <div class='col'>
-      <div class="card" style="width: 18rem;">
-        <% if @product.image.attached? %>
-          <p>
-            <%= image_tag @product.image, :size => '100%xauto', class: "card-img-top" %>
-          </p>
-        <% end %>
-        <div class="card-body">
-          <h5 class="card-title"><%= @product.name %></h5>
-          <p class="card-text">
-            <strong>Description: </strong> <br>
-            <%= @product.description[0,650] + "..." %>
-            <p class="card-text">
-              <strong>Stock: </strong>
-              <%= @product.in_stock ? 'Available' : 'Currently unavailable' %></p>
-            <% if !current_user&.admin?  %>
-              <%# <a href="#" class="btn btn-primary">Add to cart</a> %>
-              <%= form_with(url: add_to_cart_product_path(@product), method: :post, class: 'mb-3') do |form| %>
-                <%= form.hidden_field :quantity, value: 1 %>
-                <%= form.submit 'Add to Cart', class: 'btn btn-success' %>
+    <div class='col d-flex justify-content-center'>
+      <div class="card m-3 shadow" style="max-width: 720px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <% if @product.image.attached? %>
+              <p>
+              <%= image_tag @product.image, class: "img-fluid rounded-start" %>
+              </p>
+            <% else %>
+            <img
+              src="https://www.mahalaxmifoods.com/include/assets/default_product_image.png"
+              alt="Default product image"
+              class="img-fluid rounded-start"
+            />
+            <% end %>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><%= @product.name %></h5>
+              <p class="card-text text-muted mb-2">
+                <strong>Description: </strong> <br>
+                <%= @product.description[0,650] + "..." %>
+              </p>
+              <p class="card-text mb-2">
+                <strong>Stock: </strong>
+                <%= @product.in_stock ? 'Available' : 'Currently unavailable' %>
+              </p>
+              <% if current_user&.admin?  %>
+                <%= link_to 'Edit', edit_product_path(@product), class: 'btn btn-warning' %>
+              <% else %>
+                <%= form_with(url: add_to_cart_product_path(@product), method: :post, class: '') do |form| %>
+                  <%= form.hidden_field :quantity, value: 1 %>
+                  <%= form.submit 'Add to Cart', class: 'btn btn-success' %>
+                <% end %>
               <% end %>
-            <% end %>
-            <% if current_user&.admin?  %>
-              <%= link_to 'Edit', edit_product_path(@product), class: 'btn btn-primary' %>
-            <% end %>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
