@@ -15,23 +15,23 @@
         <tr>
           <td><%= item.product.name %></td>
           <td>
-            <img class="rounded-circle" width="55" <%=image_tag(item.product.image)%>
+            <img class="rounded-circle" width="55" <%=image_tag(item.product.image)%>>
           </td>
-            <td>
-              <%= button_to '-', cart_item_path(item.id, operation: 'decrease'), method: :patch, class: "btn btn-outline-secondary" %>
-              <%= item.quantity %>
-              <%= button_to '+', cart_item_path(item.id, operation: 'increase'), method: :patch, class: "btn btn-outline-secondary" %>
-            </td>
-            <td><%= item.product.price %></td>
-            <td>
-              <%= link_to 'Remove', item, data: { turbo_method: :delete, confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <%= button_to 'Place Order', orders_path, method: :post, class: 'btn btn-success' %>
-  <% else %>
-    <p>Your cart is empty.</p>
-  <% end %>
-  <%= link_to 'Continue Shopping', products_path, class: 'btn btn-primary' %>
+          <td>
+            <%= button_to '-', cart_item_path(item.id, operation: 'decrease'), method: :patch, class: "btn btn-outline-secondary" %>
+            <%= item.quantity %>
+            <%= button_to '+', cart_item_path(item.id, operation: 'increase'), method: :patch, class: "btn btn-outline-secondary" %>
+          </td>
+          <td><%= item.product.price %></td>
+          <td>
+            <%= link_to 'Remove', item, data: { turbo_method: :delete, confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= button_to 'Place Order', orders_path, method: :post, class: 'btn btn-success' %>
+<% else %>
+  <p>Your cart is empty.</p>
+<% end %>
+<%= link_to 'Continue Shopping', products_path, class: 'btn btn-primary' %>
