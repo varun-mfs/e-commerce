@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col">
+      <h1>Order Details</h1>
+      <p><strong>Invoice Number:</strong> <%= @order.invoice_number %></p>
+      <p><strong>Total Price: <%= number_to_currency(@order.total_price) %></strong></p>
+      <!-- Add other order details here -->
+      <h2>Order Items</h2>
+      <% if @order.order_items.length %>
+        <ul class="list-group">
+          <% @order.order_items.each do |item| %>
+            <li class="list-group-item">
+              <strong><%= item.product.name %></strong>
+              <p><strong>Description:</strong> <%= item.product.description %></p>
+              <p><strong>Price per Unit:</strong> <%= number_to_currency(item.product.price) %></p>
+              <p><strong>Quantity:</strong> <%= item.quantity %></p>
+              <p><strong>Status :</strong> <%=  @order.status %></p>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>No items in this order.</p>
+      <% end %>
+      <% if current_user&.admin?  %>
+        <%= form_with(model: @order, url: order_path(@order), method: :patch, class: 'mb-3') do |form| %>
+          <div class="mb-3">
+            <%= form.label :status, class: 'form-label' %>
+            <%= form.select :status, Order.statuses.keys.map { |s| [s.capitalize, s] }, class: 'form-select' %>
+          </div>
+          <%= form.submit 'Update Status', class: 'btn btn-primary' %>
+        <% end %>
+        <%= button_to 'Delete Order', @order, method: :delete, class: 'd-inline btn btn-danger mt-3' %>
+      <% else %>
+        <%= button_to 'Cancel Order', @order, method: :delete, class: 'btn btn-danger mt-3' %>
+      <% end %>
+      <%= link_to 'Back to Orders', orders_path, class: 'btn btn-primary mt-3' %>
+    </div>
+  </div>
+</div>

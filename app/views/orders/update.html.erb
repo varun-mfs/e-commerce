@@ -1,0 +1,11 @@
+<div class="container mt-4">
+  <h1>Update Order Status</h1>
+  <%= form_with(model: @order, url: update_status_order_path(@order), method: :patch, class: 'mb-3') do |form| %>
+    <div class="mb-3">
+      <%= form.label :status, class: 'form-label' %>
+      <%= form.select :status, Order.statuses.keys.map { |s| [s.capitalize, s] }, class: 'form-select' %>
+    </div>
+    <%= form.submit 'Update Status', class: 'btn btn-primary' %>
+  <% end %>
+  <%= link_to 'Back to Order', order_path(@order), class: 'btn btn-secondary mt-3' %>
+</div>
