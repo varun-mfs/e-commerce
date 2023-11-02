@@ -6,7 +6,7 @@ class CartItemsController < ApplicationController
     if @cart_item.destroy
       redirect_to cart_path, notice: 'Product removed from the cart.'
     else
-      flash[:alert] = 'Product not found.'
+      flash[:alert] = 'Failed to delete.'
       redirect_to cart_path
     end
   end
