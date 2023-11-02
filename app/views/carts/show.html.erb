@@ -1,4 +1,3 @@
-<!-- app/views/carts/show.html.erb -->
 <h1>Your Cart</h1>
 <% if @cart.cart_items.present? %>
   <table class="table">
@@ -15,7 +14,7 @@
           <td><%= item.product.name %></td>
           <td><%= item.quantity %></td>
           <td>
-            <%= link_to 'Remove', item, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            <%= link_to 'Remove', item, data: { turbo_method: :delete, confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
           </td>
         </tr>
       <% end %>
