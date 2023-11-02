@@ -16,7 +16,6 @@ class OrdersController < ApplicationController
     @order = Order.create(order_params)
     move_cart_items_to_order(@order)
     if @order.save
-      puts "%%%%%%%%%%%%%% ORDER SAVED %%%%%%%%%%%%%%%%%%%%"
       redirect_to order_path(@order), notice: 'Order placed successfully.'
     else
       redirect_to cart_path, alert: 'Error placing the order.'
