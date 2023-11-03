@@ -4,9 +4,15 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   # GET /products
+  # def index
+  #   @products = Product.all
+  #   # authorize @products
+  # end
   def index
-    @products = Product.all
-    # authorize @products
+    respond_to do |format|
+      format.html
+      format.json { render json: ProductDatatable.new(params) }
+    end
   end
   
   # GET /products/1
